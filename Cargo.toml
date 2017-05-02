@@ -1,0 +1,12 @@
+[package]
+name = "lvm-sys"
+version = "0.1.0"
+authors = ["Chris Holcombe <xfactor973@gmail.com>"]
+homepage = "https://github.com/cholcombe973/lvm-sys"
+build = "build.rs"
+license = "MIT"
+
+[build-dependencies]
+bindgen = "0.23"
+
+[dependencies]
