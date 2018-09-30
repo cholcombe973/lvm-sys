@@ -4,22 +4,18 @@ use std::env;
 use std::path::PathBuf;
 
 fn main() {
-    // Tell cargo to tell rustc to link the system bzip2
+    // Tell cargo to tell rustc to link the system lvm2app
     // shared library.
     println!("cargo:rustc-link-lib=lvm2app");
 
-    // The bindgen::Builder is the main entry point
-    // to bindgen, and lets you build up options for
-    // the resulting bindings.
     let bindings = bindgen::Builder::default()
-        // Do not generate unstable Rust code that
-        // requires a nightly rustc and enabling
-        // unstable features.
-        .no_unstable_rust()
         // The input header we would like to generate
         // bindings for.
         .header("wrapper.h")
-        .whitelisted_function("lvm.*")
+        .whitelist_function("dm_list*")
+        .whitelist_function("lvm.*")
+        .whitelist_type("*list_t")
+        .whitelist_type("dm_str_list")
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.
