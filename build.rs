@@ -7,12 +7,15 @@ fn main() {
     // Tell cargo to tell rustc to link the system lvm2app
     // shared library.
     println!("cargo:rustc-link-lib=lvm2app");
+    println!("cargo:rustc-link-lib=devmapper");
 
     let bindings = bindgen::Builder::default()
         // The input header we would like to generate
         // bindings for.
         .header("wrapper.h")
-        .whitelist_function("dm_list*")
+        .whitelist_function("dm_list_first")
+        .whitelist_function("dm_list_next")
+        .whitelist_function("dm_list_end")
         .whitelist_function("lvm.*")
         .whitelist_type("*list_t")
         .whitelist_type("dm_str_list")
